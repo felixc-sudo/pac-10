@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CARBONCUT | DOM-Driven Carbon Footprint Tracking & Reduction Services</title>
+  <link rel="stylesheet" href="carboncut_dom_portal.css" />
+</head>
+<body>
+
+  <!-- Top Navigation with DOM Dropdown Menu (Component 2 from Practicum Diagram) -->
+  <header class="cc-header">
+    <div class="cc-container cc-nav-row">
+      <a href="#hero-hub" class="cc-brand">
+        <span class="cc-dot"></span> CARBONCUT
+      </a>
+
+      <nav class="cc-nav" aria-label="Primary Navigation">
+        <a href="#dom-lab">DOM Interaction Lab</a>
+        <a href="#interactive-form-sec">Audit Form</a>
+
+        <!-- Dropdown Menu: Modify DOM elements to toggle menu visibility -->
+        <div class="cc-dropdown" id="servicesDropdown">
+          <button type="button" class="cc-drop-btn" id="dropToggleBtn" aria-expanded="false">
+            Reduction Services &#9662;
+          </button>
+          <ul class="cc-drop-panel" id="dropMenuList" hidden>
+            <li><a href="#interactive-form-sec" data-tier="Scope 1–2 Energy Audit">Scope 1–2 Energy Audit</a></li>
+            <li><a href="#interactive-form-sec" data-tier="Solar & PPA Transition">Solar &amp; PPA Transition</a></li>
+            <li><a href="#interactive-form-sec" data-tier="Verified Reforestation Offsets">Verified Reforestation Offsets</a></li>
+            <li><a href="#crud-checklist" data-tier="Supply Chain Decarbonization">Supply Chain Decarbonization</a></li>
+          </ul>
+        </div>
+
+        <a href="#crud-checklist">Action Checklist</a>
+      </nav>
+
+      <!-- Modal Trigger: Manipulate DOM elements to display modal -->
+      <button type="button" class="cc-btn cc-btn-primary" id="openModalBtn">
+        Offset Certificate Modal
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero-hub" class="cc-hero">
+    <div class="cc-container cc-hero-grid">
+      <div>
+        <span class="cc-badge">Carbon Footprint Tracking &amp; Reduction Services</span>
+        <h1>Real-Time DOM Telemetry for Net-Zero Operations</h1>
+        <p>
+          CARBONCUT leverages Document Object Model (DOM) traversal and event-driven JavaScript
+          (<code>getElementById</code>, <code>querySelector</code>, <code>addEventListener</code>)
+          to validate emissions audits, toggle service menus, launch offset certificates, and manage
+          live carbon reduction tasks without a single page reload.
+        </p>
+        <div class="cc-hero-actions">
+          <a href="#interactive-form-sec" class="cc-btn cc-btn-primary">Run Emissions Form</a>
+          <button type="button" class="cc-btn cc-btn-outline" id="heroModalBtn">Preview Offset Modal</button>
+        </div>
+      </div>
+
+      <!-- Practicum Diagram Card: Usage of DOM Elements for User Interactions -->
+      <aside class="cc-diagram-card" aria-label="Usage of DOM Elements for User Interactions">
+        <h2>Usage of DOM Elements for User Interactions</h2>
+        <ul class="cc-dom-pillars">
+          <li>
+            <strong>1. Interactive Form</strong>
+            <span>Access DOM elements to validate form input &amp; compute live CO₂e</span>
+          </li>
+          <li>
+            <strong>2. Dropdown Menu</strong>
+            <span>Modify DOM elements to toggle service menu visibility</span>
+          </li>
+          <li>
+            <strong>3. Modal</strong>
+            <span>Manipulate DOM elements to display verified offset certificates</span>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Component 1: Interactive Form (Access DOM elements to validate form input) -->
+  <section id="interactive-form-sec" class="cc-section">
+    <div class="cc-container">
+      <div class="cc-sec-head">
+        <h2>1. Interactive Carbon Audit Form (DOM Validation)</h2>
+        <p>Submit facility details to validate inputs via DOM nodes and calculate monthly &amp; annual CO₂e output.</p>
+      </div>
+
+      <div class="cc-form-layout">
+        <form id="carbonAuditForm" class="cc-form-card" novalidate>
+          <div class="cc-field">
+            <label for="orgNameInput">Organization / Facility Name *</label>
+            <input type="text" id="orgNameInput" placeholder="e.g., GreenTech Logistics Hub" />
+            <small class="cc-err" id="orgNameErr"></small>
+          </div>
+
+          <div class="cc-field">
+            <label for="selectedServiceInput">Selected Reduction Service</label>
+            <select id="selectedServiceInput">
+              <option value="Scope 1–2 Energy Audit">Scope 1–2 Energy Audit</option>
+              <option value="Solar & PPA Transition">Solar &amp; PPA Transition</option>
+              <option value="Verified Reforestation Offsets">Verified Reforestation Offsets</option>
+              <option value="Supply Chain Decarbonization">Supply Chain Decarbonization</option>
+            </select>
+          </div>
+
+          <div class="cc-two-col">
+            <div class="cc-field">
+              <label for="kwhInput">Monthly Electricity (kWh) *</label>
+              <input type="number" id="kwhInput" min="1" value="320" />
+              <small class="cc-err" id="kwhErr"></small>
+            </div>
+            <div class="cc-field">
+              <label for="kmInput">Monthly Fleet Travel (km) *</label>
+              <input type="number" id="kmInput" min="0" value="480" />
+              <small class="cc-err" id="kmErr"></small>
+            </div>
+          </div>
+
+          <button type="submit" class="cc-btn cc-btn-primary cc-full-btn">
+            Validate &amp; Calculate Footprint
+          </button>
+        </form>
+
+        <div class="cc-result-card" id="auditResultBox">
+          <span class="cc-kicker">LIVE DOM AUDIT OUTPUT</span>
+          <h3 id="resultOrgTitle">Awaiting Facility Submission</h3>
+          <div class="cc-big-num"><span id="monthlyCo2Val">331</span> <small>kg CO₂e / month</small></div>
+          <p>Annual Projection: <strong id="annualCo2Val">3.97</strong> tonnes CO₂e / year</p>
+          <p class="cc-service-tag">Target Plan: <strong id="resultPlanLabel">Scope 1–2 Energy Audit</strong></p>
+          <div id="validationStatus" class="cc-status-pill">Ready — Enter organization name &amp; click Validate</div>
+          <button type="button" class="cc-btn cc-btn-secondary cc-full-btn" id="openCertFromResultBtn">
+            Open Verified Offset Modal
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRUD Action Checklist (Input box, Add button onclick, CRUD array of tasks) -->
+  <section id="crud-checklist" class="cc-section cc-tinted">
+    <div class="cc-container">
+      <div class="cc-sec-head">
+        <h2>Carbon Reduction CRUD Action Checklist</h2>
+        <p>Create, read, update, and delete sustainability milestones via DOM manipulation and a live task array.</p>
+      </div>
+
+      <div class="cc-crud-card">
+        <div class="cc-input-row">
+          <input
+            type="text"
+            id="taskInput"
+            placeholder="Enter a carbon reduction action (e.g., Switch warehouse lighting to LEDs)..."
+            aria-label="New carbon reduction task"
+          />
+          <button type="button" class="cc-btn cc-btn-primary" onclick="addTask()">Add Task</button>
+        </div>
+
+        <div class="cc-crud-meta">
+          <span id="taskCounter">0 tasks tracked</span>
+          <button type="button" class="cc-link-btn" onclick="resetDefaultTasks()">Reset Sample Tasks</button>
+        </div>
+
+        <ul id="taskListUl" class="cc-task-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Minimum Underpinning Theory Section -->
+  <section id="dom-lab" class="cc-section">
+    <div class="cc-container">
+      <div class="cc-sec-head">
+        <h2>Minimum Underpinning Theory: DOM Elements in User Interactions</h2>
+        <p>Hierarchical HTML document traversal and event-driven manipulation without page reloads.</p>
+      </div>
+
+      <div class="cc-theory-card">
+        <p>
+          The <strong>Document Object Model (DOM)</strong> represents a webpage as a hierarchical tree of object nodes
+          (elements, attributes, and text). JavaScript accesses and manipulates this tree using
+          <code>getElementById</code>, <code>querySelector</code>, and <code>addEventListener</code> to respond
+          dynamically to user events—validating interactive form inputs in real time, toggling dropdown menu visibility,
+          and displaying modal dialogs without requiring a full page reload.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Component 3: Interactive Modal (Manipulate DOM elements to display modal) -->
+  <div class="cc-modal-backdrop" id="offsetModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading" hidden>
+    <div class="cc-modal-box">
+      <div class="cc-modal-head">
+        <h3 id="modalHeading">CARBONCUT Verified Offset Certificate</h3>
+        <button type="button" class="cc-close-x" id="closeModalBtn" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="cc-modal-body">
+        <p class="cc-modal-sub">Generated dynamically via DOM node manipulation:</p>
+        <div class="cc-cert-box">
+          <p><strong>Organization:</strong> <span id="modalOrgName">GreenTech Logistics Hub</span></p>
+          <p><strong>Selected Service:</strong> <span id="modalServiceName">Scope 1–2 Energy Audit</span></p>
+          <p><strong>Annual Footprint to Offset:</strong> <span id="modalAnnualTonnes">3.97</span> tonnes CO₂e/yr</p>
+          <p><strong>Registry Standard:</strong> ISO-14064 &amp; Verified Carbon Standard (VCS)</p>
+        </div>
+        <button type="button" class="cc-btn cc-btn-primary cc-full-btn" id="commitToCrudBtn">
+          + Add Offset Pledge to CRUD Checklist
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="cc-footer">
+    <div class="cc-container cc-footer-row">
+      <span><strong>CARBONCUT</strong> &mdash; Carbon Footprint Tracking &amp; Reduction Services</span>
+      <span>&copy; 2026 CARBONCUT &bull; GitHub &amp; Vercel Ready</span>
+    </div>
+  </footer>
+
+  <script src="carboncut_dom_events.js"></script>
+</body>
+</html>
